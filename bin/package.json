@@ -1,0 +1,7 @@
+{
+	"name": "mindgen",
+	"bin": {
+		"mindgen": "mindgen.js"
+	},
+	"dependencies": {}
+}
