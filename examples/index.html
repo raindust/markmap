@@ -28,4 +28,14 @@ svg#mindmap {
 <script src="../d3-flextree.js"></script>
 <script src="../view.mindmap.js"></script>
 <script src="example.view.js"></script>
+<script src="svgenie.js"></script>
+<script src="canvg.js"></script>
+<script src="rgbcolor.js"></script>
+<script>
+    window.onkeydown = function(e){
+      if (e.keyCode === 73) {
+        svgenie.save( document.getElementById('mindmap'), { name:"this.png" } );
+      }
+    }
+</script>
 <svg id="mindmap"></svg>

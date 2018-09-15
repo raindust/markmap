@@ -1,25 +1,34 @@
-module.exports = function(text) {
+module.exports = function (text) {
   var lines = text.split('\n');
-  
+
   var entries = [];
-  //let first line to be title defaultly
-  entries.push({
-    depth: 1,
-    line: 0,
-    name: lines[0]
-  });
 
   var firstIndent = true;
   var indentLength = 1;
+  var realLineCount = 0;
 
-  for (var i = 1; i < lines.length; i++) {
+  for (var i = 0; i < lines.length; i++) {
     var match = /^(\s*)(.+)$/.exec(lines[i]);
     if (!match) {
       continue;
     }
 
+    realLineCount++;
     //to catch tab and other space situation
     var isSpaces = match[1].length > 0 && match[1][0] === ' ';
+    if (realLineCount === 2) {
+      if (!isSpaces) {
+        entries[0].depth = 1;
+        entries[0].line = 0;
+      } else {
+        entries.splice(0, 0, {
+          depth: 1,
+          line: 0,
+          name: "root"
+        });
+      }
+    }
+
     var depth = match[1].length;
     if (isSpaces) {
       if (firstIndent) {
